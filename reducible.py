@@ -144,7 +144,6 @@ def main():
     """The main function that calculates the longest reducible words"""
     # create an empty word_list
     word_list = []
-    
     # read words using input redirection
     # where each line read from input()
     # should be a single word. Append to word_list
@@ -154,25 +153,20 @@ def main():
         word = line.strip()
         if word:
             word_list.append(word)
-    
     # find length of word_list
     n_words = len(word_list)
-    
     # determine prime number N that is greater than twice
     # the length of the word_list
     N = 2 * n_words + 1
     while not is_prime(N):
         N += 1
-    
     # create an empty hash_list
     # populate the hash_list with N blank strings
     hash_list = ["" for _ in range(N)]
-    
     # hash each word in word_list into hash_list
     # for collisions use double hashing
     for word in word_list:
         insert_word(word, hash_list)
-    
     # create an empty hash_memo of size M
     # we do not know a priori how many words will be reducible
     # let us assume it is 10 percent (fairly safe) of the words
@@ -182,13 +176,10 @@ def main():
     M = M_start
     while not is_prime(M):
         M += 1
-    
     # populate the hash_memo with M blank strings
     hash_memo = ["" for _ in range(M)]
-    
     # create an empty list reducible_words
     reducible_words = []
-    
     # for each word in the word_list recursively determine
     # if it is reducible, if it is, add it to reducible_words
     # as you recursively remove one letter at a time check
@@ -198,15 +189,12 @@ def main():
     for word in word_list:
         if is_reducible(word, hash_list, hash_memo):
             reducible_words.append(word)
-    
     # find the largest reducible words in reducible_words
     longest = get_longest_words(reducible_words)
-    
     # print the reducible words in alphabetical order
     # one word per line
     for word in sorted(longest):
         print(word)
-
 
 if __name__ == "__main__":
     main()
